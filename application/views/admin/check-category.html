@@ -61,22 +61,6 @@
                     <td>栏目名称</td>
                     <td>操作</td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a class="bga" href="#">删除</a>
-                        <a class="bga" href="">修改</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a class="bga" href="#">删除</a>
-                        <a class="bga" href="">修改</a>
-                    </td>
-                </tr>
             </table>
 				</div>
              <!-- /. PAGE INNER  -->
@@ -89,5 +73,27 @@
     <script src="<?php echo base_url().'assets/js/jquery-1.10.2.js'?>"></script>
     <script src="<?php echo base_url().'assets/js/bootstrap.min.js'?>"></script>
     <script src="<?php echo base_url().'assets/js/custom-scripts.js'?>"></script>
+    <script>
+        $(document).ready(
+                function(){
+                    $.ajax({
+                        type:'POST',
+                        url:"<?php echo site_url().'/Category/show'?>",
+                        dataType:"json",
+                        error:function(){
+                            alert("请求失败");
+                        },
+                        success:function(data){
+                            for(var i=0;i<data.length;i++){
+                                var id=data[i].cid;
+                                var name=data[i].cname;
+                                var msg="<tr><td>"+id+"</td><td>"+name+"</td><td><a class='bga' href='#'>删除</a> <a class='bga' href='<?php echo site_url().'/Admin/edit_category'?>'>修改</a></td>";
+                                $("#page-wrapper .table").append(msg);
+                            }
+                        }
+                    })
+                }
+        )
+    </script>
 </body>
 </html>

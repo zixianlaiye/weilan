@@ -108,16 +108,29 @@
                 <div class="form-group">
                     <label for="#" class="col-sm-3 control-label">项目状态</label>
                      <div class="col-sm-5">
-                     <p class="form-control" id="tip"></p>
+                         <label class="checkbox-inline">
+                             <input type="radio" name="optionsRadiosinline" id="optionsRadios3"
+                                    value="option1" checked> 项目进行中
+                         </label>
+                         <label class="checkbox-inline">
+                             <input type="radio" name="optionsRadiosinline" id="optionsRadios4"
+                                    value="option2"> 项目未进行
+                         </label>
+                         <label class="checkbox-inline">
+                             <input type="radio" name="optionsRadiosinline" id="optionsRadios5"
+                                    value="optio3"> 项目已完成
+                         </label>
                      </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"></label>
+                    <label for="#" class="col-sm-3 control-label">文件说明</label>
                     <div class="col-sm-5">
-                    <label for="inputfile" class="col-sm-2 btn btn-info">添加文件</label>
+                        <p class="form-control" rows="7" id="filestatus"></p>
                     </div>
-                    <input type="file" id="inputfile" style="position: absolute;clip: rect(0,0,0,0)">
-
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <input type="file" id="inputfile">
                 </div>
                 <div class="form-group">
                     <label for="提交" class="col-sm-4 control-label"></label>

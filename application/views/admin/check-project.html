@@ -64,26 +64,6 @@
                     <td>开发周期</td>
                     <td>项目预算</td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a class="bga" href="#">删除</a>
-                        <a class="bga" href="">修改</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a class="bga" href="#">删除</a>
-                        <a class="bga" href="">修改</a>
-                    </td>
-                </tr>
             </table>
 
 					</div>
@@ -102,15 +82,33 @@
                 function(){
                     $.ajax({
                         type:'POST',
-                        url:'<?php echo site_url(‘Admin/get_all’)?>',
+                        url:"<?php echo site_url().'/Admin/get_all'?>",
                         dataType:"json",
                         error:function(){
                             alert("请求失败");
                         },
-                        success:function(){
-                            alert("请求成功");
+                        success:function(data){
+                           for(var i=0;i<data.length;i++){
+                               var id=data[i].uid;
+                               var name=data[i].name;
+                               var msg="<tr><td>"+id+"</td><td>"+name+"</td><td></td><td></td><td><a class='bga' href='#'>删除</a>"+"<a id='btn' title='"+i+"' class='bga' href='<?php echo site_url().'/Admin/edit_project'?>'>修改</a></td>";
+                               $("#page-wrapper .table").append(msg);
+                           }
                         }
                     })
+                    $("#btn").click(function(){
+                                alert("成功");}
+                                );
+                }
+        )
+        $(document).ready(
+                function(){
+                    var url="<?php echo site_url().'/Admin/get_all'?>";
+                    $("#btn").click(function(){
+                        alert("成功")
+                    var data=$this.attr('title');
+                    alert(data);
+                })
                 }
         )
     </script>

@@ -31,7 +31,7 @@ class Category_model extends CI_Model{
         $this->db->delete('category',array('cid'=>$cid));
     }
 
-    //获取全部类型信息
+    //获取全部栏目信息
     public function get_category()
     {
         $data=$this->db->get('category')->result_array();
@@ -39,7 +39,7 @@ class Category_model extends CI_Model{
         return $data;
     }
 
-    //通过CID取得类型信息
+    //通过CID取得栏目信息
     public function get($cid){
 
         $data=$this->db->get_where('category',array('cid'=>$cid))->result_array();

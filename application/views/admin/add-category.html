@@ -55,11 +55,11 @@
         <!-- /. NAV SIDE  -->
          <div id="page-wrapper" >
              <!--测试提交到test.php-->
-            <form role="form" action="<?php echo site_url().'/Category/add' ?>" method="post" id="add-category-form" class="form-horizontal bgBack">
+            <form role="form" action="<?php echo site_url().'/Category/add'?>" method="post" id="add-category-form" class="form-horizontal bgBack">
                 <div class="form-group">
                     <label for="类型名称" class="col-sm-3 control-label">类型名称</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="cname" name="cname">
+                        <input type="text" class="form-control" id="cname" name="cname" required="required">
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,12 +83,11 @@
     <script>
         $(document).ready(function(){
             var options = {
-                success: function () {
-                    alert("000");
-                }
+                error:function(){
+                    alert("添加失败");
+                },
+                success: function () {}
             };
-
-            // ajaxForm
             $("#add-category-form").ajaxForm(options);
 
 

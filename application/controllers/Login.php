@@ -15,11 +15,23 @@ class Login extends CI_Controller{
 
 
 
-        $this->load->view('admin/index.html');
+        $this->load->view('admin/log.html');
     }
 
     //进行密码验证
     public function check(){
+        $username=$this->input->post('username');
+        $password=$this->input->post('password');
+        $c=md5($password);
+        $data=array(
+
+            'username'=>$username,
+            'password'=>md5($password),
+            'a'=>$c
+        );
+        print_r($data);
+
+        //用户名验证模型，首先验证用户名是否存在，若存在则在进行密码验证操作
 
 
 
