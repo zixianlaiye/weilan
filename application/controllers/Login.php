@@ -29,7 +29,7 @@ class Login extends CI_Controller{
             'password'=>md5($password),
             'a'=>$c
         );
-        print_r($data);
+
 
         //用户名验证模型，首先验证用户名是否存在，若存在则在进行密码验证操作
 
