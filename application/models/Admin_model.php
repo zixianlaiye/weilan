@@ -10,26 +10,28 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin_model extends CI_Model{
 
-    //增添项目信息
+    //鏂板椤圭洰淇℃伅
     public function add_project($data){
         $this->db->insert('project',$data);
 
     }
 
-    //修改项目信息
+    //淇敼椤圭洰淇℃伅
     public function change_project($uid,$data){
 
         $this->db->update('project',$data,array('uid'=>$uid));
 
     }
 
-    //删除项目信息
-    public function delete_project($uid){
-        $this->db->delete('project',array('uid'=>$uid));
+    //鍒犻櫎椤圭洰淇℃伅
+    public function delete_project($pid){
+
+         $a=$this->db->delete('project',array('pid'=>$pid));
+        return $a;
 
     }
 
-    //查看所有项目信息
+    //鑾峰彇鍏ㄩ儴椤圭洰淇℃伅
     public function get_all(){
 
         $this->db->select('project.uid,project.name,category.cname,project.needtime,project.money',FAlSE);
@@ -43,15 +45,43 @@ class Admin_model extends CI_Model{
 
     }
 
-    //根据uid查看项目所有信息
-    public function get($uid){
+    //閫氳繃cid鑾峰彇璇ョ被椤圭洰鍏ㄩ儴淇℃伅
+    public function get($cid){
         $this->db->select('project.*,category.cname',FAlSE);
         $this->db->from('project');
         $this->db->from('category');
 
         $where='project.cid=category.cid';
         $this->db->where($where);
-        $this->db->where('project.uid',$uid);
+        $this->db->where('project.cid',$cid);
+        $data=$this->db->get()->result_array();
+        return $data;
+
+    }
+
+    //閫氳繃pid鑾峰彇鏌愪竴椤圭洰鍏蜂綋淇℃伅
+    public function get_project($pid)
+    {
+        $this->db->select('project.*,category.cname',FAlSE);
+        $this->db->from('project');
+        $this->db->from('category');
+
+        $where='project.cid=category.cid';
+        $this->db->where($where);
+        $this->db->where('project.pid',$pid);
+        $data=$this->db->get()->result_array();
+        return $data;
+
+    }
+
+    public function get_name($cid){
+        $this->db->select('project.name,category.cname',FAlSE);
+        $this->db->from('project');
+        $this->db->from('category');
+
+        $where='project.cid=category.cid';
+        $this->db->where($where);
+        $this->db->where('project.cid',$cid);
         $data=$this->db->get()->result_array();
         return $data;
 

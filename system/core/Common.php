@@ -881,4 +881,13 @@ if ( ! function_exists('function_usable'))
 
 	}
 
+	//ÌáÊ¾º¯Êý
+    function show($msg)
+    {
+        header('Content-Type:text/html; charset=utf-8');
+
+        echo "<script tyype='text/javascript'>alert('$msg');</script>";
+        die;
+    }
+
 }

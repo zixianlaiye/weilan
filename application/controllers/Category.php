@@ -10,25 +10,25 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-//ÏîÄ¿·ÖÀà¹ÜÀíÒ³Ãæ
+//ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 class Category extends CI_Controller{
 
 
-    //½«Ä£ÐÍÔØÈëÐ´½ø¹¹Ôìº¯Êý
+    //æž„é€ å‡½æ•°ï¼Œè½½å…¥æ¨¡åž‹
     public function Category(){
 
         parent::__construct();
         $this->load->model('Category_model','cate');
     }
 
-    //ÐÂÔöÀ¸Ä¿½çÃæÌø×ª
+    //æ·»åŠ é¡¹ç›®è·³è½¬é¡µé¢
     public function add_category(){
 
         $this->load->view('admin/add-category.html');
     }
 
 
-    //ÐÂÔöÀ¸Ä¿
+    //æ–°å¢žæ ç›®åŠ¨ä½œ
     public function add(){
 
         $cname=$this->input->post('cname');
@@ -36,31 +36,35 @@ class Category extends CI_Controller{
             'cname'=>$cname
         );
 
-        //µ÷ÓÃÄ£ÐÍ½øÐÐÐÞ¸Ä
+        //è¿”å›žæç¤º
 
         if($this->cate->add_category($data))
 
-            echo '0';
+            echo  error('æ·»åŠ å¤±è´¥');
         else
-            echo '1';
+            echo show('æ·»åŠ æˆåŠŸ');
 
 
     }
 
-    //²é¿´À¸Ä¿Ò³ÃæÌø×ª
+    //è¿›å…¥é¡¹ç›®ä¿®æ”¹ç•Œé¢
     public function check_category(){
+        $data['category']=$this->cate->get_category();
 
-        $this->load->view('admin/check-category.html');
+
+        $this->load->view('admin/change-category.html',$data);
     }
 
 
-    //ÐÞ¸ÄÀ¸Ä¿Ìø×ª
+    //ï¿½Þ¸ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½×ª
     public function edit_category()
     {
-        $this->load->view('admin/edit-category.html');
+        $cid=$_GET['cid'];
+        $data['category']=$this->cate->get($cid);
+        $this->load->view('admin/edit-category.html',$data);
     }
 
-    //ÐÞ¸ÄÀ¸Ä¿
+    //ï¿½Þ¸ï¿½ï¿½ï¿½Ä¿
     public function change(){
 
         $cid=$_GET['cid'];
@@ -76,7 +80,7 @@ class Category extends CI_Controller{
 
     }
 
-    //É¾³ýÀ¸Ä¿
+    //é€šè¿‡é¡¹ç›®cidåˆ é™¤é¡¹ç›®
 
     public function delete(){
         $cid=$_GET['cid'];
@@ -89,12 +93,22 @@ class Category extends CI_Controller{
 
     }
 
-    //²é¿´ËùÓÐÀ¸Ä¿
+    //æ˜¾ç¤ºå…¨éƒ¨æ ç›®
     public function show(){
 
        $data= $this->cate->get_category();
         echo json_encode($data);
 
+    }
+    //é€šè¿‡cidæ˜¾ç¤ºæŸä¸€æ ç›®
+    public function cid_category()
+    {
+        $cid=$_GET['cid'];
+        $data=$this->cate->get($cid);
+        if(empty($data))
+            echo 'error';
+        else
+        echo json_encode($data);
     }
 
 

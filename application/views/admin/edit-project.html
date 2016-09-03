@@ -1,156 +1,180 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta content="" name="description" />
-    <meta content="webthemez" name="author" />
-    <title>增加项目</title>
-    <!-- Bootstrap Styles-->
-    <link href="<?php echo base_url().'assets/css/bootstrap.css'?>" rel="stylesheet" />
-    <!-- FontAwesome Styles-->
-    <link href="<?php echo base_url().'assets/css/font-awesome.css'?>" rel="stylesheet" />
-    <!-- Custom Styles-->
-    <link href="<?php echo base_url().'assets/css/custom-styles.css'?>" rel="stylesheet" />
-    <!-- Google Fonts
-    <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />-->
+
+
+
 
 </head>
 
-<body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i> 管理员</strong></a>
-				
-		<div id="sideNav" href="">
-		<i class="fa fa-bars icon"></i> 
-		</div>
+
+<body class="nav-md">
+
+<div class="container body">
+
+
+  <?php $this->load->view('admin/left.html')?>
+
+  <!-- top navigation -->
+  <?php $this->load->view('admin/top.html')?>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>
+                    编辑项目
+                </h3>
             </div>
 
-        </nav>
-        <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
+          </div>
+          <div class="clearfix"></div>
 
-                    <li>
-                        <a class="active-menu" href="<?php echo site_url().'/Admin/add_project'?>"><i class="fa fa-dashboard"></i> 增加项目</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo site_url().'/Admin/check_project'?>"><i class="fa fa-qrcode"></i> 查看项目</a>
-                    </li>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
 
-                    <li>
-                        <a href="<?php echo site_url().'/Category/add_category'?>"><i class="fa fa-table"></i> 栏目新增</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo site_url().'/Category/check_category'?>"><i class="fa fa-fw fa-file"></i>查看栏目</a>
-                    </li>
-                </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content" style="display: block !important;">
 
+                  <form class="form-horizontal form-label-left" novalidate method="post">
+
+                    <span class="section">项目详情</span>
+
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-name">项目名称 <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="project-name" class="form-control col-md-7 col-xs-12" name="name"  value="<?php echo $list['0']['name']?>" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-type">项目类型<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input id="project-type" class="form-control col-md-7 col-xs-12" name="project-type"  value="<?php echo $list['0']['cname']?>" disabled type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="time">开发周期<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="time" name="needtime" required="required" placeholder="天" value="<?php echo $list['0']['needtime']?>" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="money">预算金额<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="money" name="money" data-validate-minmax="0,1000000000000" value="<?php echo $list['0']['money']?>" required="required" placeholder="元" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                      <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="publish-time">发布时间<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input id="publish-time" class="form-control col-md-7 col-xs-12" name="datetime"  value="<?php echo $list['0']['datetime']?>" disabled type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">联系人<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input id="contact" class="form-control col-md-7 col-xs-12" name="connecter" value="<?php echo $list['0']['connecter']?>" required  type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">联系电话<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="tel" id="telephone" name="phone" required="required" data-validate-length-range="8,20" value="<?php echo $list['0']['phone']?>" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">联系邮箱</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="email" id="email" name="email"  value="<?php echo $list['0']['email']?>"  class="form-control col-md-7 col-xs-12">
+                        <!-- <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12"> -->
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">项目描述<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <textarea id="textarea" required="required" name="description"   class="form-control col-md-7 col-xs-12" maxLength="400"><?php echo $list['0']['description']?></textarea>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">项目进度<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="radio" name="dostatus"   id="a1" <?php if($list[0]['dostatus']==0) echo "checked"?> value="0"  >未完成
+                         <input type="radio" name="dostatus"  id="a2"  <?php if($list[0]['dostatus']==1) echo "checked"?> value="1">进行中
+                         <input type="radio" name="dostatus" id="a3"  <?php if($list[0]['dostatus']==2) echo "checked"?> value="2">已完成
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                     <p class="tip" style="text-align: center">
+                       <?php
+                       if($list[0]['filestatus']==1)
+                       echo '您已上传文件，因只能上传一个文件，若要上传多个文件请上传压缩包';
+                       else
+                         echo '您未上传文件，若要上传请点击添加附件';
+
+                        ?>
+                       &nbsp;&nbsp;<a href="javascript:0" style="color: blue">原件下载</a>
+                     </p>
+                    </div>
+                     <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-file">添加附件
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12 file-container">
+                        <input id="project-file" class="form-control col-md-7 col-xs-12" data-validate-length-range="30" data-validate-words="2" name="project-file"  type="file">
+                        <input id="file-value" class="form-control col-md-7 col-xs-12" data-validate-length-range="30" data-validate-words="2"    type="text"  placeholder="点击这里选择文件">
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="submit-cancel">
+                        <button id="send" type="submit" class="btn btn-success">提交</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-
-        </nav>
-        <!-- /. NAV SIDE  -->
-      
-		<div id="page-wrapper">
-            <form action="#" method="post" role="form" class="form-horizontal bgBack">
-                <div class="form-group">
-                    <label for="项目名称" class="col-sm-3 control-label">项目名称</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="项目类型" class="col-sm-3 control-label">项目类型</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="cid">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="开发周期" class="col-sm-3 control-label">开发周期</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="needtime">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="核心功能" class="col-sm-3 control-label">核心功能</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="corefunction">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="预算酬金" class="col-sm-3 control-label">预算酬金</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="money">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="技术要求" class="col-sm-3 control-label">技术要求</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="technology">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="补充内容" class="col-sm-3 control-label">补充内容</label>
-                    <div class="col-sm-5">
-                        <textarea class="form-control" rows="7" id="addcontent"></textarea>
-                    </div>
-               </div>
-                <div class="form-group">
-                    <label for="#" class="col-sm-3 control-label">项目状态</label>
-                     <div class="col-sm-5">
-                         <label class="checkbox-inline">
-                             <input type="radio" name="optionsRadiosinline" id="optionsRadios3"
-                                    value="option1" checked> 项目进行中
-                         </label>
-                         <label class="checkbox-inline">
-                             <input type="radio" name="optionsRadiosinline" id="optionsRadios4"
-                                    value="option2"> 项目未进行
-                         </label>
-                         <label class="checkbox-inline">
-                             <input type="radio" name="optionsRadiosinline" id="optionsRadios5"
-                                    value="optio3"> 项目已完成
-                         </label>
-                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="#" class="col-sm-3 control-label">文件说明</label>
-                    <div class="col-sm-5">
-                        <p class="form-control" rows="7" id="filestatus"></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"></label>
-                    <input type="file" id="inputfile">
-                </div>
-                <div class="form-group">
-                    <label for="提交" class="col-sm-4 control-label"></label>
-                    <div class="col-sm-7">
-                        <button type="button" class="btn btn-default btn-lg" id="submit">提交</button>
-                    </div>
-                </div>
-
-            </form>
-
-            <!-- /. PAGE INNER  -->
+          </div>
         </div>
-        <!-- /. PAGE WRAPPER  -->
+      </div>
+
+
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
     </div>
-    <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
-    <script src="<?php echo base_url().'assets/js/jquery-1.10.2.js'?>"></script>
-    <script src="<?php echo base_url().'assets/js/bootstrap.min.js'?>"></script>
-    <script src="<?php echo base_url().'assets/js/custom-scripts.js'?>"></script>
+  </div>
+
 </body>
 
+
+<script src="<?php echo base_url()?>/style/js/bootstrap.min.js"></script>
+
+<script src="<?php echo base_url()?>/style/js/validator/validator.js"></script>
+<script src="<?php echo base_url()?>/style/js/custom.js"></script>
+
+<script type="text/javascript">
+$('.right_col').css('min-height', $(window).height());
+</script>
+<script src="<?php echo base_url()?>/style/js/pace/pace.min.js"></script>
 </html>

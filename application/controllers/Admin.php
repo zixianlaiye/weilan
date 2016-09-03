@@ -9,31 +9,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller{
 
-    //ÉèÖÃ¹¹Ôìº¯Êý£¬ÔØÈë¹«¹²Ä£ÐÍ
+    //è®¾ç½®æž„é€ å‡½æ•°ï¼Œè½½å…¥æ¨¡åž‹
     public function __construct(){
         parent::__construct();
+
+        //è½½å…¥æ•°æ®åº“æ¨¡åž‹
+        $this->load->model('Category_model','cate');
 
         $this->load->model('Admin_model','admin');
     }
 
 
-    //ÐÂÔöÏîÄ¿ÐÅÏ¢
+    //æ–°å¢žé¡¹ç›®ä¿¡æ¯
     public function add(){
 
-        //³£¹æÌá½»ÏîÄ¿
+        //æŽ¥æ”¶ä¿¡æ¯
         $name=$this->input->post('name','true');
         $cid=$this->input->post('cid','true');
         $needtime=$this->input->post('needtime','true');
-        $corefunction=$this->input->post('corefunction','true');
         $money=$this->input->post('money','true');
-        $technology=$this->input->post('technology','true');
-        $addcontent=$this->input->post('addcontent','true');
+        $connecter=$this->input->post('connecter','true');
+        $description=$this->input->post('description','true');
+        $phone=$this->input->post('phone','true');
+        $email=$this->input->post('email','true');
 
-        //ÏîÄ¿·¢²¼Ê±¼ä
-        date_default_timezone_set('Asia/Shanghai');
-        $datetime = date('F j Y h:i:s A');
 
-        //ÊÇ·ñÓÐÉÏ´«ÎÄ¼þÅÐ¶Ï
+
+        //è®¾ç½®æ—¶é—´
+//        date_default_timezone_set('Asia/Shanghai');
+//        $datetime = date('F j Y h:i:s A');
+        $datetime=time();
+
+        //åˆ¤æ–­æ˜¯å¦æœ‰ä¸Šä¼ æ–‡ä»¶
 
         if(!empty($_FILES['file']['tmp_name']))
         {
@@ -41,13 +48,14 @@ class Admin extends CI_Controller{
 
 
             $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'bmp|jpg|png';
-            $config['encrypt_name'] = TRUE;
+            $config['allowed_types'] = 'doc|rar|docx|zip';
+            $config['overwrite']=true;
+
 
 
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('file')) {
-                echo 2; //ÎÄ¼þÉÏ´«Ê§°Ü
+                error('æ–‡ä»¶ä¸Šä¼ å¤±è´¥ï¼Œè¯·æ£€æŸ¥æ–‡ä»¶æ ¼å¼åŽé‡æ–°å°è¯•'); //ä¸Šä¼ æ–‡ä»¶å¤±è´¥
             } else {
                 $fileaddress = '/uploads/' . $this->upload->data('file_name');
 
@@ -55,63 +63,112 @@ class Admin extends CI_Controller{
                     'name'=>$name,
                     'cid'=>$cid,
                     'needtime'=>$needtime,
-                    'corefunction'=>$corefunction,
+                    'description'=>$description,
+                    'email'=>$email,
+                    'phone'=>$phone,
                     'money'=>$money,
-                    'technology'=>$technology,
-                    'addcontent'=>$addcontent,
+                    'connecter'=>$connecter,
+
                     'datetime'=>$datetime,
                     'filestatus'=>'1',
                     'fileaddress'=>$fileaddress,
                 );
 
 
-                //ÐÂÔöÐÅÏ¢µ½Êý¾Ý¿â
+                //é¡¹ç›®ä¿¡æ¯å…¥åº“
                 print_r($data);
                 $this->admin->add_project($data);
+                success('Login/index','å‘å¸ƒæˆåŠŸ');
 
 
 
             }
         }
 
-        //ÈôÃ»ÓÐÉÏ´«ÎÄ¼þ£¬ÉèÖÃ³ÉÁíÒ»ÖÖÊý×éÐÎÊ½²åÈëÊý¾Ý¿â
-        $data=array(
-            'name'=>$name,
-            'cid'=>$cid,
-            'needtime'=>$needtime,
-            'corefunction'=>$corefunction,
-            'money'=>$money,
-            'technology'=>$technology,
-            'addcontent'=>$addcontent,
-            'datetime'=>$datetime,
-        );
+        else {
 
-        print_r($data);
-        $this->admin->add_project($data);
+            //è‹¥æœªæ·»åŠ é™„ä»¶ï¼Œåˆ™ç›´æŽ¥ä¸Šä¼ 
+            $data = array(
+                'name'=>$name,
+                'cid'=>$cid,
+                'needtime'=>$needtime,
+                'description'=>$description,
+                'email'=>$email,
+                'phone'=>$phone,
+                'money'=>$money,
+                'connecter'=>$connecter,
+
+                'datetime'=>$datetime,
+            );
+
+            print_r($data);
+            $this->admin->add_project($data);
+
+            success('Login/index','å‘å¸ƒæˆåŠŸ');
+        }
 
     }
 
-    //Ôö¼ÓÏîÄ¿ÐÅÏ¢½çÃæÌø×ª
+    //æ–°å¢žé¡¹ç›®ä¿¡æ¯è·³è½¬ç•Œé¢
     public function add_project(){
+        //èŽ·å–é¡¹ç›®ç±»åž‹
+        $this->load->model('Category_model','cate');
+        $data['category']=$this->cate->get_category();
 
-        $this->load->view('admin/add-project.html');
+
+        $this->load->view('admin/add-project.html',$data);
     }
 
-    //ÏîÄ¿²é¿´Ò³ÃæÌø×ª
+    //åˆ†ç±»æŸ¥è¯¢é¡¹ç›®ä¿¡æ¯
     public function check_project(){
 
-    $this->load->view('admin/check-project.html');
+        $this->load->model('Category_model','cate');
+        $data['category']=$this->cate->get_category();
+
+
+    $this->load->view('admin/check-project.html',$data);
 }
 
+//åˆ†ç±»æ˜¾ç¤ºé¡¹ç›®ä¿¡æ¯
+    public function project_list()
+    {
+        $cid=$_GET['cid'];
+        $this->load->model('Admin_model','admin');
+        $data['list']=$this->admin->get($cid);
+        $this->load->view('admin/project-list.html',$data);
 
-    //±à¼­ÏîÄ¿ÐÅÏ¢Ìø×ª½çÃæ
 
-    public function edit_project(){
-        $this->load->view('admin/edit-project.html');
+
 
     }
 
-    //±à¼­ÐÞ¸ÄÏîÄ¿ÐÅÏ¢
+    //é€šè¿‡pidæŸ¥çœ‹é¡¹ç›®ä¿¡æ¯è·³è½¬ç•Œé¢
+    public function pid_project()
+    {
+        $pid=$_GET['pid'];
+        $data['list']=$this->admin->get_project($pid);
+//        p($data);die;
+
+        $this->load->view('admin/project-detail.html',$data);
+
+    }
+
+
+    //å¯¹é¡¹ç›®ä¿¡æ¯è¿›è¡Œç¼–è¾‘
+
+    public function edit_project(){
+        $pid=$_GET['pid'];
+        $data['list']=$this->admin->get_project($pid);
+
+
+
+
+
+        $this->load->view('admin/edit-project.html',$data);
+
+    }
+
+    //ç¼–è¾‘é¡¹ç›®å…¥åº“æ“ä½œ
     public function change(){
 
 
@@ -120,21 +177,39 @@ class Admin extends CI_Controller{
     }
 
 
-    //É¾³ýÏîÄ¿ÐÅÏ¢
+    //é€šè¿‡pidåˆ é™¤é¡¹ç›®ä¿¡æ¯
     public function delete(){
 
-        $uid=$_GET['uid'];
+//        $pid=$_GET['pid'];
+
+//
+
+//
+//        if($this->admin->delete_project($pid))
+//            error('åˆ é™¤å¤±è´¥');
+//        else
+//           success('Login/index','åˆ é™¤é™ˆåŠŸ');
+
+        try{
+            $pid=$_GET['pid'];
+            if($this->admin->delete_project($pid))
+            throw new Exception('åˆ é™¤å¤±è´¥');
+            else
+                success('Login/index','åˆ é™¤é™ˆåŠŸ');
 
 
-        if($this->admini->delete_project($uid))
-            echo'0';
-        else
-            echo'1';
+        }
+        catch(Exception $e){
+            error($e->getMessage()) ;
+            die;
 
+
+
+        }
 
     }
 
-    //²éÑ¯È«²¿ÏîÄ¿ÐÅÏ¢ÄÚÈÝ
+    //èŽ·å–å…¨éƒ¨é¡¹ç›®ä¿¡æ¯ä¿¡æ¯
     public function get_all(){
 
         $data=$this->admin->get_all();
@@ -143,12 +218,22 @@ class Admin extends CI_Controller{
 
     }
 
-    //Í¨¹ýuidµ÷È¡ÏîÄ¿È«²¿ÐÅÏ¢
-    public function get(){
+    //é€šè¿‡é¡¹ç›®pidèŽ·å–é¡¹ç›®è¯¦ç»†ä¿¡æ¯
+    public function get_detail()
+    {
 
-        $uid=$_GET['uid'];
-        echo $uid;
-        $data=$this->admin->get($uid);
+        $pid=$_GET['pid'];
+
+        $data=$this->admin->get_project($pid);
+        echo json_encode($data);
+
+    }
+
+    //é€šè¿‡cidè°ƒå–å±žäºŽè¿™ä¸ªæ ç›®çš„æ‰€æœ‰é¡¹ç›®åç§°ä¿¡æ¯
+    public function get_name(){
+
+        $cid=$_GET['cid'];
+        $data=$this->admin->get_name($cid);
         echo json_encode($data);
 
     }

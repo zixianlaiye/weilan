@@ -1,98 +1,87 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-      <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta content="" name="description" />
-    <meta content="webthemez" name="author" />
-    <title>栏目新增</title>
-	<!-- Bootstrap Styles-->
-    <link href="<?php echo base_url().'assets/css/bootstrap.css'?>" rel="stylesheet" />
-    <!-- FontAwesome Styles-->
-    <link href="<?php echo base_url().'assets/css/font-awesome.css'?>" rel="stylesheet" />
-    <!-- Custom Styles-->
-    <link href="<?php echo base_url().'assets/css/custom-styles.css'?>" rel="stylesheet" />
+
+
 </head>
-<body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="add-project.html"><strong><i class="icon fa fa-plane"></i>管理员</strong></a>
-				<div id="sideNav" href="">
-		<i class="fa fa-bars icon"></i> 
-		</div>
+
+
+<body class="nav-md">
+
+<div class="container body">
+
+
+  <?php $this->load->view('admin/left.html')?>
+
+  <!-- top navigation -->
+  <?php $this->load->view('admin/top.html')?>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <!-- page content -->
+  <div class="right_col" role="main">
+
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>
+            增加栏目
+          </h3>
+        </div>
+
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+
+              <div class="clearfix"></div>
             </div>
-        </nav>
-        <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
+            <div class="x_content" style="display: block !important;">
 
-                    <li>
-                        <a href="<?php echo site_url().'/Admin/add_project'?>"><i class="fa fa-dashboard"></i> 增加项目</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo site_url().'/Admin/check_project'?>"><i class="fa fa-qrcode"></i> 查看项目</a>
-                    </li>
+              <form  action="<?php echo site_url().'/Category/add'?>"  class="form-horizontal form-label-left" novalidate  method="post">
 
-                    <li>
-                        <a href="<?php echo site_url().'/Category/add_category'?>" class="active-menu"><i class="fa fa-table"></i> 栏目新增</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo site_url().'/Category/check_category'?>"><i class="fa fa-fw fa-file"></i>查看栏目</a>
-                    </li>
-                </ul>
+                <span class="section">&nbsp;</span>
 
-            </div>
-
-        </nav>
-        <!-- /. NAV SIDE  -->
-         <div id="page-wrapper" >
-             <!--测试提交到test.php-->
-            <form role="form" action="<?php echo site_url().'/Category/add'?>" method="post" id="add-category-form" class="form-horizontal bgBack">
-                <div class="form-group">
-                    <label for="类型名称" class="col-sm-3 control-label">类型名称</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" id="cname" name="cname" required="required">
-                    </div>
+                <div class="item form-group change-category">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cname">栏目名称<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="cname" class="form-control col-md-7 col-xs-12" name="cname"  required="required" type="text">
+                  </div>
                 </div>
+                <div class="ln_solid"></div>
                 <div class="form-group">
-                    <label for="提交" class="col-sm-4 control-label"></label>
-                    <div class="col-sm-7">
-                        <button class="btn btn-default btn-lg" id="submit" name="submit">提交</button>
-                    </div>
+                  <div class="submit-cancel">
+                    <button id="send" type="submit" class="btn btn-success">编辑</button>
+                  </div>
                 </div>
-            </form>
-         </div>
-             <!-- /. PAGE INNER  -->
+              </form>
             </div>
-         <!-- /. PAGE WRAPPER  -->
-     <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
-    <script src="<?php echo base_url().'assets/js/jquery-1.10.2.js'?>"></script>
-    <script src="<?php echo base_url().'assets/js/bootstrap.min.js'?>"></script>
-    <script src="<?php echo base_url().'assets/js/jquery.form.js'?>"></script>
-    <script src="<?php echo base_url().'assets/js/custom-scripts.js'?>"></script>
-    <script>
-        $(document).ready(function(){
-            var options = {
-                error:function(){
-                    alert("添加失败");
-                },
-                success: function () {}
-            };
-            $("#add-category-form").ajaxForm(options);
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-        })
-    </script>
-   
+  <!-- footer content -->
+  <?php $this->load->view('admin/foot.html')?>
+  <!-- /footer content -->
+</div>
+</div>
+
 </body>
+
+
+<script src="<?php echo base_url()?>/style/js/bootstrap.min.js"></script>
+
+<script src="<?php echo base_url()?>/style/js/validator/validator.js"></script>
+<script src="<?php echo base_url()?>/style/js/custom.js"></script>
+
+<!-- pace -->
+
+<script src="<?php echo base_url()?>/style/js/pace/pace.min.js"></script>
 </html>
