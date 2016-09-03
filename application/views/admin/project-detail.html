@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+</head>
+
+
+<body class="nav-md">
+
+<div class="container body">
+
+
+  <?php $this->load->view('admin/left.html')?>
+
+  <!-- top navigation -->
+  <?php $this->load->view('admin/top.html')?>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <!-- page content -->
+    <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left" style="padding-bottom: 30px">
+                <h3>项目详情页</h3>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="detail-item">
+              <p class="title">项目名称</p>
+              <p class="item-detail"><?php echo $list['0']['name']?></p>
+            </div>
+            <div class="detail-item">
+              <p class="title">项目类型</p>
+              <p class="item-detail"><?php echo $list['0']['cname']?></p>
+            </div>
+            <div class="detail-item">
+              <p class="title">开发周期</p>
+              <p class="item-detail"><?php echo $list['0']['needtime']?>天</p>
+            </div>
+            <div class="detail-item">
+              <p class="title">项目预算</p>
+              <p class="item-detail"><?php echo $list['0']['money']?>元</p>
+            </div>
+            <div class="detail-item">
+              <p class="title">发布时间 </p>
+              <p class="item-detail"><?php echo $list['0']['datetime']?></p>
+            </div>
+            <div class="detail-item">
+              <p class="title">项目描述</p>
+              <p class="item-detail"><?php echo $list['0']['description']?></p>
+            </div>
+            <div class="detail-item">
+              <p class="title">联系人</p>
+              <p class="item-detail"><?php echo $list['0']['connecter']?></p>
+            </div>
+            <div class="detail-item">
+              <p class="title">联系电话</p>
+              <p class="item-detail"><?php echo $list['0']['phone']?></p>
+            </div>
+            <div class="detail-item">
+              <p class="title">联系邮箱</p>
+              <p class="item-detail"><?php echo $list['0']['email']?></p>
+            </div>
+            <div class="detail-item">
+              <p class="title">项目进度</p>
+              <p class="item-detail">正在进行</p>
+            </div>
+            <div class="detail-item">
+              <p class="title">项目附件</p>
+              <p class="item-detail">
+                <?php  if($list['0']['filestatus'])
+                echo '已上传文件，文件名为'.$list['0']['filename'].',请点击下载文件下载';
+                 else echo '无上传文件，若需上传请在编辑页添加' ?>
+
+                <a href="<?php echo base_url($list['0']['fileaddress'])?>" style="color:blue">下载原件</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
+    </div>
+  </div>
+
+</body>
+
+
+<script src="<?php echo base_url()?>/style/js/bootstrap.min.js"></script>
+
+  <script src="<?php echo base_url()?>/style/js/validator/validator.js"></script>
+<script src="<?php echo base_url()?>/style/js/custom.js"></script>
+
+<script type="text/javascript">
+$('.right_col').css('min-height', $(window).height());
+</script>
+<script src="<?php echo base_url()?>/style/js/pace/pace.min.js"></script>
+</html>

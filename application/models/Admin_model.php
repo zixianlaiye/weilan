@@ -26,8 +26,8 @@ class Admin_model extends CI_Model{
     //删除项目信息
     public function delete_project($pid){
 
-         $a=$this->db->delete('project',array('pid'=>$pid));
-        return $a;
+         $this->db->delete('project',array('pid'=>$pid));
+
 
     }
 

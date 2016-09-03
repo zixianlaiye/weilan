@@ -40,9 +40,9 @@ class Category extends CI_Controller{
 
         if($this->cate->add_category($data))
 
-            echo  error('添加失败');
+              error('添加失败');
         else
-            echo show('添加成功');
+             show('添加成功');
 
 
     }
@@ -56,7 +56,7 @@ class Category extends CI_Controller{
     }
 
 
-    //�޸���Ŀ��ת
+    //跳转到修改界面
     public function edit_category()
     {
         $cid=$_GET['cid'];
@@ -64,7 +64,7 @@ class Category extends CI_Controller{
         $this->load->view('admin/edit-category.html',$data);
     }
 
-    //�޸���Ŀ
+    //修改项目操作
     public function change(){
 
         $cid=$_GET['cid'];
@@ -86,9 +86,9 @@ class Category extends CI_Controller{
         $cid=$_GET['cid'];
 
         if($this->cate->delete_category($cid))
-            echo'0';
+            error('删除失败');
         else
-            echo'1';
+            success('login/index','删除成功');
 
 
     }

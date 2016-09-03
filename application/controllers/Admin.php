@@ -195,7 +195,7 @@ class Admin extends CI_Controller{
             if($this->admin->delete_project($pid))
             throw new Exception('删除失败');
             else
-                success('Login/index','删除陈功');
+                success('Login/index','删除成功');
 
 
         }

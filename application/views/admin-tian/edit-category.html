@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>增加项目</title>
+    <!-- Bootstrap Styles-->
+    <link href="<?php echo base_url().'assets/css/bootstrap.css'?>" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="<?php echo base_url().'assets/css/font-awesome.css'?>" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="<?php echo base_url().'assets/css/custom-styles.css'?>" rel="stylesheet" />
+    <!-- Google Fonts
+    <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />-->
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i> 管理员</strong></a>
+				
+		<div id="sideNav" href="">
+		<i class="fa fa-bars icon"></i> 
+		</div>
+            </div>
+
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a class="active-menu" href="<?php echo site_url().'/Admin/add_project'?>"><i class="fa fa-dashboard"></i> 增加项目</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url().'/Admin/check_project'?>"><i class="fa fa-qrcode"></i> 查看项目</a>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo site_url().'/Category/add_category'?>"><i class="fa fa-table"></i> 栏目新增</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url().'/Category/check_category'?>"><i class="fa fa-fw fa-file"></i>查看栏目</a>
+                    </li>
+                    </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+      
+		<div id="page-wrapper">
+            <form action="#" method="post" role="form" class="form-horizontal bgBack">
+                <div class="form-group">
+                    <label for="项目名称" class="col-sm-3 control-label">项目名称</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="项目类型" class="col-sm-3 control-label">项目类型</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="cid">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="开发周期" class="col-sm-3 control-label">开发周期</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="needtime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="核心功能" class="col-sm-3 control-label">核心功能</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="corefunction">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="预算酬金" class="col-sm-3 control-label">预算酬金</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="money">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="技术要求" class="col-sm-3 control-label">技术要求</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="technology">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="补充内容" class="col-sm-3 control-label">补充内容</label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" rows="7" id="addcontent"></textarea>
+                    </div>
+               </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-5">
+                    <label for="inputfile" class="col-sm-2 btn btn-info">添加文件</label>
+                    </div>
+                    <input type="file" id="inputfile" style="position: absolute;clip: rect(0,0,0,0)">
+
+                </div>
+                <div class="form-group">
+                    <label for="提交" class="col-sm-4 control-label"></label>
+                    <div class="col-sm-7">
+                        <button type="button" class="btn btn-default btn-lg" id="submit">提交</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="<?php echo base_url().'assets/js/jquery-1.10.2.js'?>"></script>
+    <script src="<?php echo base_url().'assets/js/bootstrap.min.js'?>"></script>
+    <script src="<?php echo base_url().'assets/js/custom-scripts.js'?>"></script>
+</body>
+
+</html>

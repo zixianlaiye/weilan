@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+</head>
+
+
+<body class="nav-md">
+
+<div class="container body">
+
+
+    <?php $this->load->view('admin/left.html')?>
+
+        <!-- top navigation -->
+        <?php $this->load->view('admin/top.html')?>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>
+                            增加栏目
+                        </h3>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content" style="display: block !important;">
+
+                                <form class="form-horizontal form-label-left" novalidate  method="post">
+
+                                    <span class="section">&nbsp;</span>
+
+                                    <div class="item form-group change-category">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cname">栏目名称<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="cname" class="form-control col-md-7 col-xs-12" name="cname"  required="required" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="submit-cancel">
+                                            <button id="send" type="submit" class="btn btn-success">编辑</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- footer content -->
+        <?php $this->load->view('admin/foot.html')?>
+        <!-- /footer content -->
+    </div>
+</div>
+
+</body>
+
+
+<script src="<?php echo base_url()?>/style/js/bootstrap.min.js"></script>
+
+<script src="<?php echo base_url()?>/style/js/validator/validator.js"></script>
+<script src="<?php echo base_url()?>/style/js/custom.js"></script>
+
+<!-- pace -->
+
+<script src="<?php echo base_url()?>/style/js/pace/pace.min.js"></script>
+</html>

@@ -1,0 +1,67 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "微软雅黑", sans-serif;
+}
+.login {
+  display: flex;
+  background: url("../img/furley_bg.png");
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.login form {
+  font-weight: bolder;
+  position: relative;
+  background-color: #ffffff;
+  width: 257px;
+  height: 200px;
+  padding: 59px;
+  border-radius: 25px;
+  opacity: 0.5;
+  box-shadow: 3px 2px 22px 2px;
+}
+.login form .input-container {
+  margin: 31px 0;
+  overflow: hidden;
+}
+.login form .input-container label {
+  float: left;
+}
+.login form .input-container input {
+  float: right;
+  padding: 0 10px;
+  line-height: 20px;
+}
+.login form button {
+  display: block;
+  margin: auto;
+  padding: 6px 28px;
+  border-radius: 8px;
+  font-weight: bolder;
+  font-size: 15px;
+  outline: none;
+}
+div.head {
+  width: 80%;
+  float: right;
+  height: 30px;
+  padding: 20px 0;
+}
+div.head .menu {
+  float: left;
+  height: 30px;
+}
+div.head .exit {
+  height: 30px;
+  float: right;
+  padding-right: 20px;
+}
+div.slide-bar a img.log {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+}
+div.slide-bar a span.name {
+  padding: 20px;
+}
