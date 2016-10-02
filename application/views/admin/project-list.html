@@ -79,7 +79,7 @@
                         <span><?php echo $v['money'] ?>元</span>
                       </td>
                       <td class="project_progress">
-                        <span>未完成</span>
+                        <span><?php echo $v['dostatus'] ?></span>
                       </td>
                       <td>
                         <a href="<?php echo site_url().'/Admin/pid_project?pid='.$v['pid'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 查看</a>
@@ -91,6 +91,8 @@
                     <?php endforeach ?>
                     </tbody>
                   </table>
+                  <center><?php echo $links ?></center>
+
                   <!-- end project list -->
 
                 </div>
@@ -99,6 +101,7 @@
           </div>
         </div>
       </div>
+
       <!-- /page content -->
 
       <!-- footer content -->

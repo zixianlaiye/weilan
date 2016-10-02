@@ -15,7 +15,7 @@ class Login extends CI_Controller{
 
 
 
-        $this->load->view('admin/welcome.html');
+        $this->load->view('admin/add-category.html');
     }
 
     //进行密码验证

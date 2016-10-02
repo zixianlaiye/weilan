@@ -5,7 +5,7 @@
 }
 .login {
   display: flex;
-  background: url("../img/furley_bg.png");
+  background: url('../img/furley_bg.png');
   height: 100%;
   align-items: center;
   justify-content: center;

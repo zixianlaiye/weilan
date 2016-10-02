@@ -133,8 +133,52 @@ class Admin extends CI_Controller{
     public function project_list()
     {
         $cid=$_GET['cid'];
+
+
+
+        //进行分页类配置
+        $this->load->library('pagination');
+        $perPage=2;//控制每页显示多少条数据
+        $config['base_url'] = site_url('/Admin/project_list?cid='.$cid);
+      $config['total_rows'] = $this->db->where('project.cid',$cid)->count_all_results('project');//统计文章数据个数\
+//        $config['total_rows'] =100;//
+
+        $config['per_page'] = $perPage;
+
+        $config['first_link']='第一页';
+        $config['last_link']='最后一页';
+        $config['prev_link']='上一页';
+        $config['next_link']='下一页';
+        $config['use_page_numbers']=true;//URL中的数字显示第几页，否则，显示到达第几条
+        $config['page_query_string'] = TRUE;
+
+        $this->pagination->initialize($config);
+
+        $data['links']= $this->pagination->create_links();
+        if(!empty($_GET['per_page']))
+        {
+            $per_page=$_GET['per_page'];
+        }
+        else $per_page=1;
+
+
+        $this->db->limit($perPage,($per_page-1)*$perPage);
+
+
+
+
+
+
+
+
+
+
+
+//从数据库中取出数据
         $this->load->model('Admin_model','admin');
         $data['list']=$this->admin->get($cid);
+
+
         $this->load->view('admin/project-list.html',$data);
 
 
@@ -170,10 +214,98 @@ class Admin extends CI_Controller{
 
     //编辑项目入库操作
     public function change(){
+        //接收项目pid值
+        $pid=$_GET['pid'];
+
+        //验证是否存在该项目信息，不存在返回错误提示
+        $data=$this->admin->get_project($pid);
+
+        if(empty($data))
+        {
+            error('您输入的项目不存在');
+        }
+
+
+        //接收表单post来的信息
+        $name=$this->input->post('name');
+        $needtime=$this->input->post('needtime');
+        $money=$this->input->post('money');
+        $connecter=$this->input->post('connecter');
+        $phone=$this->input->post('phone');
+        $description=$this->input->post('description');
+        $dostatus=$this->input->post('dostatus');
+        $email=$this->input->post('email');
 
 
 
 
+        //若存在，判断是否有上传文件，然后分别进行操作
+//
+        if(!empty($_FILES['file']['tmp_name'])){
+            if($data['0']['filestatus']=='1'&& file_exists($data['0']['filestatus']))
+            {
+                //删除原有的文件
+                unlink($data['0']['fileaddress']);
+            }
+
+            //上传文件的配置
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'doc|rar|docx|zip';
+            $config['overwrite']=true;
+
+
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('file')) {
+                error('文件上传失败，请检查文件格式后重新尝试'); //上传文件失败
+            } else {
+                $fileaddress = '/uploads/' . $this->upload->data('file_name');
+
+                $change=array(
+
+                    'name'=>$name,
+                    'needtime'=>$needtime,
+                    'description'=>$description,
+                    'email'=>$email,
+                    'phone'=>$phone,
+                    'money'=>$money,
+                    'connecter'=>$connecter,
+                    'filestatus'=>'1',
+                    'fileaddress'=>$fileaddress,
+                    'dostatus'=>$dostatus
+                );
+
+
+                //项目信息入库
+                print_r($data);
+                $this->admin->change_project($pid,$change);
+                success('Login/index','发布成功');
+            }
+
+        }
+
+
+        //无上传文件时的操作
+        else
+        {
+
+
+            $change=array(
+
+                'name'=>$name,
+                'needtime'=>$needtime,
+                'description'=>$description,
+                'email'=>$email,
+                'phone'=>$phone,
+                'money'=>$money,
+                'connecter'=>$connecter,
+                'dostatus'=>$dostatus
+            );
+            $this->admin->change_project($pid,$change);
+            success('Login/index','发布成功');
+
+
+        }
     }
 
 

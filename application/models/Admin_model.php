@@ -17,9 +17,9 @@ class Admin_model extends CI_Model{
     }
 
     //修改项目信息
-    public function change_project($uid,$data){
+    public function change_project($pid,$data){
 
-        $this->db->update('project',$data,array('uid'=>$uid));
+        $this->db->update('project',$data,array('pid'=>$pid));
 
     }
 
@@ -73,6 +73,8 @@ class Admin_model extends CI_Model{
         return $data;
 
     }
+
+    //通过cid获取获取
 
     public function get_name($cid){
         $this->db->select('project.name,category.cname',FAlSE);
