@@ -46,5 +46,16 @@ class Category_model extends CI_Model{
         return $data;
     }
 
+    //检查cid是否有效
+    public function check_cid($cid){
+
+        $this->db->select('cid');
+        $this->db->from('category');
+        $this->db->where('cid',$cid);
+        $data=$this->db->count_all_results();//计算有多少条数据
+        return $data;
+
+    }
+
 
 }

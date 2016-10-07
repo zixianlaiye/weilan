@@ -341,34 +341,15 @@ class Admin extends CI_Controller{
 
     }
 
-    //获取全部项目信息信息
-    public function get_all(){
-
-        $data=$this->admin->get_all();
-        echo json_encode($data);
 
 
-    }
 
-    //通过项目pid获取项目详细信息
-    public function get_detail()
-    {
 
-        $pid=$_GET['pid'];
 
-        $data=$this->admin->get_project($pid);
-        echo json_encode($data);
 
-    }
 
-    //通过cid调取属于这个栏目的所有项目名称信息
-    public function get_name(){
 
-        $cid=$_GET['cid'];
-        $data=$this->admin->get_name($cid);
-        echo json_encode($data);
 
-    }
 
 
 

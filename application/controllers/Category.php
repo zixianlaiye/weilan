@@ -10,7 +10,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-//��Ŀ�������ҳ��
+//关于分类栏目的操作
 class Category extends CI_Controller{
 
 
@@ -96,7 +96,7 @@ class Category extends CI_Controller{
     //显示全部栏目
     public function show(){
 
-       $data= $this->cate->get_category();
+        $data= $this->cate->get_category();
         echo json_encode($data);
 
     }
