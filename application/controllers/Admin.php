@@ -44,12 +44,16 @@ class Admin extends CI_Controller{
 
         if(!empty($_FILES['file']['tmp_name']))
         {
+            //真实的文件名
+            $filename=$_FILES['file']['name'];
+
 
 
 
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'doc|rar|docx|zip';
-            $config['overwrite']=true;
+            $config['overwrite']=false;
+            $config['file_name']=time().rand(200,300);//存储所用文件名
 
 
 
@@ -57,7 +61,7 @@ class Admin extends CI_Controller{
             if (!$this->upload->do_upload('file')) {
                 error('文件上传失败，请检查文件格式后重新尝试'); //上传文件失败
             } else {
-                $fileaddress = '/uploads/' . $this->upload->data('file_name');
+                $fileaddress = '/uploads/' .$this->upload->data('file_name');
 
                 $data=array(
                     'name'=>$name,
@@ -68,7 +72,7 @@ class Admin extends CI_Controller{
                     'phone'=>$phone,
                     'money'=>$money,
                     'connecter'=>$connecter,
-
+                    'filename'=>$filename,
                     'datetime'=>$datetime,
                     'filestatus'=>'1',
                     'fileaddress'=>$fileaddress,
@@ -76,7 +80,7 @@ class Admin extends CI_Controller{
 
 
                 //项目信息入库
-                print_r($data);
+
                 $this->admin->add_project($data);
                 success('Login/index','发布成功');
 
@@ -155,6 +159,8 @@ class Admin extends CI_Controller{
         $this->pagination->initialize($config);
 
         $data['links']= $this->pagination->create_links();
+
+        //设定默认页码
         if(!empty($_GET['per_page']))
         {
             $per_page=$_GET['per_page'];
@@ -242,16 +248,15 @@ class Admin extends CI_Controller{
         //若存在，判断是否有上传文件，然后分别进行操作
 //
         if(!empty($_FILES['file']['tmp_name'])){
-            if($data['0']['filestatus']=='1'&& file_exists($data['0']['filestatus']))
-            {
-                //删除原有的文件
-                unlink($data['0']['fileaddress']);
-            }
+
 
             //上传文件的配置
+            $filename=$_FILES['file']['name'];
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'doc|rar|docx|zip';
-            $config['overwrite']=true;
+            $config['overwrite']=false;
+            $config['file_name']=time().rand(200,300);
+
 
 
 
@@ -259,6 +264,15 @@ class Admin extends CI_Controller{
             if (!$this->upload->do_upload('file')) {
                 error('文件上传失败，请检查文件格式后重新尝试'); //上传文件失败
             } else {
+                //若有文件，则先删除
+                if($data['0']['filestatus']=='1'&& file_exists($data['0']['filestatus']))
+                {
+                    //删除原有的文件
+                    unlink($data['0']['fileaddress']);
+                }
+
+
+
                 $fileaddress = '/uploads/' . $this->upload->data('file_name');
 
                 $change=array(
@@ -270,6 +284,7 @@ class Admin extends CI_Controller{
                     'phone'=>$phone,
                     'money'=>$money,
                     'connecter'=>$connecter,
+                    'filename'=>$filename,
                     'filestatus'=>'1',
                     'fileaddress'=>$fileaddress,
                     'dostatus'=>$dostatus
@@ -277,7 +292,7 @@ class Admin extends CI_Controller{
 
 
                 //项目信息入库
-                print_r($data);
+
                 $this->admin->change_project($pid,$change);
                 success('Login/index','发布成功');
             }
@@ -323,9 +338,38 @@ class Admin extends CI_Controller{
 //           success('Login/index','删除陈功');
 
         try{
+            if(!isset($_GET['pid']))
+                throw new Exception('删除信息有误');
+
             $pid=$_GET['pid'];
+
+
+            if(!$this->admin->check_pid($pid))
+            {
+                throw new Exception('删除信息不存在有误');
+            }
+
+            //从数据库中调取文件地址信息
+            $address=$this->admin->pid_file($pid);
+
+
+
+
+            if($address['0']['fileaddress']!=NULL)
+            {
+                //因为保存的时候路径第一位是/，删除的时候不能有，所以调用substr函数去除第一位
+                $address['0']['fileaddress']=substr($address['0']['fileaddress'],1);
+
+
+                if(!unlink($address['0']['fileaddress']))
+                    throw new Exception('删除文件时出现错误');
+
+            }
+
+
+
             if($this->admin->delete_project($pid))
-            throw new Exception('删除失败');
+                throw new Exception('删除失败');
             else
                 success('Login/index','删除成功');
 

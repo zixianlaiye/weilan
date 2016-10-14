@@ -1,10 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+
+
+
 </head>
-<body>
+
+
+<body class="nav-md">
+
+<div class="container body">
+
+
+    <?php $this->load->view('admin/left.html')?>
+
+    <!-- top navigation -->
+    <?php $this->load->view('admin/top.html')?>
+    <!-- /top navigation -->
+    <!-- page content -->
+    <!-- page content -->
+    <div class="right_col" role="main">
+
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>
+                        编辑项目
+                    </h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" style="display: block !important;">
+
+                            <form class="form-horizontal form-label-left"  novalidate method="post" enctype="multipart/form-data" action="<?php echo site_url().'/Picture/edit?tid='.$list['0']['tid']?>">
+
+                                <span class="section">项目详情</span>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-name">项目名称 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="project-name" class="form-control col-md-7 col-xs-12" name="name"  value="<?php echo $list['0']['name']?>" required="required" type="text">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-type">联系人<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="project-type" class="form-control col-md-7 col-xs-12" name="connecter" required="required" value="<?php echo $list['0']['connecter']?>"  type="text">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">联系电话<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="tel" id="telephone" name="phone" required="required" data-validate-length-range="8,20" value="<?php echo $list['0']['phone']?>" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">联系邮箱</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="email" id="email" name="email" required="required"  value="<?php echo $list['0']['email']?>"  class="form-control col-md-7 col-xs-12">
+                                        <!-- <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12"> -->
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="publish-time">图片名称<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="publish-time" class="form-control col-md-7 col-xs-12" name="datetime"  value="<?php echo $list['0']['picture_name']?>" disabled type="text">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">发布时间<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="contact" class="form-control col-md-7 col-xs-12" name="connecter" value="<?php echo $list['0']['datetime']?>" disabled required  type="text">
+                                    </div>
+                                </div>
+
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">项目描述<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea id="textarea" required="required" name="description"   class="form-control col-md-7 col-xs-12" maxLength="400"><?php echo $list['0']['description']?></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <p class="tip" style="text-align: center">
+                                        <?php
+                                        echo '已上传的图片名称为'.$list['0']['picture_name'].'若要进行图片替换请在添加图片处上传新的轮播图,若要查看上传的图片请点击轮播图下载';
+                                           ?>
+                                        &nbsp;&nbsp;<a href="<?php echo base_url($list['0']['picture_address'])?>" style="color: blue">轮播图下载</a>
+                                    </p>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-file">添加图片
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12 file-container">
+                                        <input id="project-file" class="form-control col-md-7 col-xs-12" data-validate-length-range="30" data-validate-words="2" name="picture"  type="file">
+                                        <input id="file-value" class="form-control col-md-7 col-xs-12" data-validate-length-range="30" data-validate-words="2"    type="text"  placeholder="点击这里选择图片">
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="submit-cancel">
+                                        <button id="send" type="submit" class="btn btn-success">提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- footer content -->
+    <footer>
+        <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+</div>
+</div>
 
 </body>
+
+
+<script src="<?php echo base_url()?>/style/js/bootstrap.min.js"></script>
+
+<script src="<?php echo base_url()?>/style/js/validator/validator.js"></script>
+<script src="<?php echo base_url()?>/style/js/custom.js"></script>
+
+<script type="text/javascript">
+    $('.right_col').css('min-height', $(window).height());
+</script>
+<script src="<?php echo base_url()?>/style/js/pace/pace.min.js"></script>
 </html>

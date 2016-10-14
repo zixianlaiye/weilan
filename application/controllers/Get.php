@@ -254,7 +254,7 @@ class Get extends CI_Controller{
         //设定默认值为0
         $numbers=0;
 
-        //利用多态性，调用不同类型的函数，查询不同分类的条数
+        //调用不同类型的函数，查询不同分类的条数
         if($cid&&$type)
             $numbers=$this->admin->get_numbers_1($cid,$dostatus);
         else
@@ -275,6 +275,14 @@ class Get extends CI_Controller{
 
 
     }
+
+    //获取轮播图信息
+    public function get_picture(){
+
+
+    }
+
+
 
 
 

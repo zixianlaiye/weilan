@@ -157,6 +157,16 @@ class Admin_model extends CI_Model{
 
     }
 
+    public function pid_file($pid){
+
+        $this->db->select('fileaddress');
+        $this->db->from('project');
+        $this->db->where('pid',$pid);
+        $data=$this->db->get()->result_array();
+        return $data;
+
+    }
+
 
 
 
