@@ -41,7 +41,7 @@ class Admin_model extends CI_Model{
         $where='project.cid=category.cid';
         $this->db->where($where);
         $this->db->order_by('project.datetime','desc');
-        $data=$this->db->get()->result_array();
+        $data=$this->db->get()->result();
         return $data;
 
     }

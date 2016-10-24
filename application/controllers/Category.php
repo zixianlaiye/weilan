@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 //关于分类栏目的操作
-class Category extends CI_Controller{
+class Category extends MY_Controller{
 
 
     //构造函数，载入模型

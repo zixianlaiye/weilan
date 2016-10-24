@@ -7,7 +7,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller{
+class Admin extends MY_Controller{
 
     //设置构造函数，载入模型
     public function __construct(){
@@ -360,9 +360,10 @@ class Admin extends CI_Controller{
                 //因为保存的时候路径第一位是/，删除的时候不能有，所以调用substr函数去除第一位
                 $address['0']['fileaddress']=substr($address['0']['fileaddress'],1);
 
+                //删除文件
+                unlink($address['0']['fileaddress']);
 
-                if(!unlink($address['0']['fileaddress']))
-                    throw new Exception('删除文件时出现错误');
+
 
             }
 

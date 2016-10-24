@@ -23,9 +23,13 @@ class Get extends CI_Controller{
 //获取全部项目信息信息，按时间排序，最新的在前面
     public function get_all(){
 
-        $data=$this->admin->get_all();
-        if(!empty($data))
-            echo json_encode($data);
+        $a=$this->admin->get_all();
+        if(!empty($a))
+        {
+
+            echo json_encode($a) ;
+        }
+
         else
             echo 'error';
 
@@ -276,8 +280,33 @@ class Get extends CI_Controller{
 
     }
 
-    //获取轮播图信息
+    //获取轮播图信息,按发布时间来排序,每次最多5个
     public function get_picture(){
+        $data=$this->pic->get_all();
+        echo json_encode($data);
+
+
+    }
+
+    //传入tid信息，获取轮播图项目详细信息
+    public function get_picture_detail(){
+        if(isset($_GET['tid']))
+            $tid=$this->input->get('tid');
+        else
+        {
+            echo '-1';
+            die;
+        }
+
+        if(!$this->pic->check_tid($tid))
+        {
+            echo '-2';
+            die;
+        }
+
+
+        $data=$this->pic->get_tid($tid);
+        echo json_encode($data);
 
 
     }

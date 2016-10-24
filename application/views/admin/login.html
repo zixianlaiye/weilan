@@ -6,11 +6,11 @@
 </head>
 <body>
 <div class="login">
-    <form action="check-project.html" method = 'post'>
+    <form action="<?php echo site_url().'/Login/check'?>" method="post">
         <span class="logo">XXX项目发布平台后台登录</span>
         <div class="input-container">
             <label for="name">用户名 *</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="username" required>
         </div>
         <div class="input-container">
             <label for="password">密码*</label>

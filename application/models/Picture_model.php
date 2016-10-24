@@ -78,12 +78,25 @@ public function check_tid($tid)
 
 }
 
-//在list页面显示全部信息
+//给前端返回最近5条轮播图片
     public function get_all(){
-        $this->db->select('picture.name,picture.datetime,picture.tid,picture.connecter');
+        $this->db->select('name,datetime,tid,connecter,words');
         $this->db->from('picture');
-        $data=$this->db->get()->result_array();
-        return $data;
+        $this->db->limit(5);
+        $this->db->order_by('datetime','desc');
+        $a=$this->db->get()->result_array();
+        return $a;
+
+    }
+
+
+//
+    public function get_list(){
+        $this->db->select('name,datetime,tid,connecter');
+        $this->db->from('picture');
+        $this->db->order_by('datetime','desc');
+        $a=$this->db->get()->result_array();
+        return $a;
 
     }
 
